@@ -66,8 +66,8 @@ namespace SharpDocx
 
                 var code = map.Text.Substring(startTagIndex + 2, endTagIndex - startTagIndex - 2);
                 var cb = GetCodeBlock(code);
-                cb.StartText = map[startTagIndex].Element as Text;
-                cb.EndText = map[endTagIndex + 1].Element as Text;
+                cb.StartText = map[startTagIndex].Element as TextType;
+                cb.EndText = map[endTagIndex + 1].Element as TextType;
                 CodeBlocks.Add(cb);
                 mapParts.Add(cb, new MapPart { StartIndex = startTagIndex, EndIndex = endTagIndex + 1});
                 startTagIndex = map.Text.IndexOf("<%", endTagIndex + 2);

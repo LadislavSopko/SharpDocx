@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpDocx", "SharpDocx\SharpDocx.csproj", "{11025F4C-5F88-4CBF-A29D-494260BF71F8}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -21,16 +21,23 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{28BE5D1E-9170-44D4-89C4-A0C8086021CC}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\Views\Inheritance.cs.docx = Samples\Views\Inheritance.cs.docx
+		Samples\Views\Main.cs.docx = Samples\Views\Main.cs.docx
 		Samples\Views\Model.cs.docx = Samples\Views\Model.cs.docx
+		Samples\Views\TextsDE.docx = Samples\Views\TextsDE.docx
+		Samples\Views\TextsIT.docx = Samples\Views\TextsIT.docx
 		Samples\Views\Tutorial.cs.docx = Samples\Views\Tutorial.cs.docx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{985BA596-7B45-4F2B-9A9E-A712408AF9D8}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\Documents\Inheritance.docx = Samples\Documents\Inheritance.docx
+		Samples\Documents\Main.DE.docx = Samples\Documents\Main.DE.docx
+		Samples\Documents\Main.IT.docx = Samples\Documents\Main.IT.docx
 		Samples\Documents\Model.docx = Samples\Documents\Model.docx
 		Samples\Documents\Tutorial.docx = Samples\Documents\Tutorial.docx
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Samples\Test\Test.csproj", "{186978DB-4921-4867-8DED-35D3B7BB2B29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +65,10 @@ Global
 		{469F76BC-D622-4AB7-B71E-DA7F265E7E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{469F76BC-D622-4AB7-B71E-DA7F265E7E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{469F76BC-D622-4AB7-B71E-DA7F265E7E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186978DB-4921-4867-8DED-35D3B7BB2B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186978DB-4921-4867-8DED-35D3B7BB2B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186978DB-4921-4867-8DED-35D3B7BB2B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186978DB-4921-4867-8DED-35D3B7BB2B29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +79,7 @@ Global
 		{3D8D60E1-5B3B-47B7-97E5-996F8906DF76} = {60ACA8F2-9057-4F58-ABF4-0278D2968EEA}
 		{28BE5D1E-9170-44D4-89C4-A0C8086021CC} = {60ACA8F2-9057-4F58-ABF4-0278D2968EEA}
 		{985BA596-7B45-4F2B-9A9E-A712408AF9D8} = {60ACA8F2-9057-4F58-ABF4-0278D2968EEA}
+		{186978DB-4921-4867-8DED-35D3B7BB2B29} = {60ACA8F2-9057-4F58-ABF4-0278D2968EEA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F682D28B-E23F-4280-9FE6-AB5ABFDCB3F2}

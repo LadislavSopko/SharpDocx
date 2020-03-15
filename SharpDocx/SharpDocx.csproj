@@ -21,6 +21,10 @@
     <PackageReleaseNotes>Release</PackageReleaseNotes>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG_DOCUMENT_CODE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="lib\**" />
     <Compile Remove="nupkg\**" />

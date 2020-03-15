@@ -8,11 +8,11 @@ namespace SharpDocx.CodeBlocks
     {
         public string Code { get; }
 
-        public Text Placeholder { get; internal set; }
+        public TextType Placeholder { get; internal set; }
 
-        internal Text StartText { get; set; }
+        internal TextType StartText { get; set; }
 
-        internal Text EndText { get; set; }
+        internal TextType EndText { get; set; }
 
         internal InsertionPoint CurrentInsertionPoint { get; set; }
 

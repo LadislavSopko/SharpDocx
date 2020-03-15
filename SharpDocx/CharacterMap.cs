@@ -119,12 +119,28 @@ namespace SharpDocx
 
                     _textBuilder.Append(t.Text);
                 }
+
+                if (child is FieldCode)
+                {
+                    var t = child as FieldCode;
+                    for (var i = 0; i < t.Text.Length; ++i)
+                    {
+                        _map.Add(new Character
+                        {
+                            Char = t.Text[i],
+                            Element = child,
+                            Index = i
+                        });
+                    }
+
+                    _textBuilder.Append(t.Text);
+                }
             }
 
             _elements.Add(ce);
         }
 
-        public int GetIndex(Text text)
+        public int GetIndex(TextType text)
         {
             // Can be used to get the index of a CodeBlock.Placeholder.
             // Then you can replace text that occurs after the code block only (instead of all text).
@@ -136,7 +152,7 @@ namespace SharpDocx
 
             for (var i = index; i >= 0; --i)
             {
-                var t = Elements[i] as Text;
+                var t = Elements[i] as TextType;
                 if (t != null && t.Text.Length > 0)
                 {
                     return _map.IndexOf(_map.First(c => c.Element == t && c.Index == t.Text.Length - 1));
@@ -145,7 +161,7 @@ namespace SharpDocx
 
             for (var i = index + 1; i < Elements.Count; ++i)
             {
-                var t = Elements[i] as Text;
+                var t = Elements[i] as TextType;
                 if (t != null && t.Text.Length > 0)
                 {
                     return _map.IndexOf(_map.First(c => c.Element == t && c.Index == 0));
@@ -180,9 +196,9 @@ namespace SharpDocx
 
         private void Replace(MapPart part, string newText)
         {
-            var startText = this[part.StartIndex].Element as Text;
+            var startText = this[part.StartIndex].Element as TextType;
             var startIndex = this[part.StartIndex].Index;
-            var endText = this[part.EndIndex].Element as Text;
+            var endText = this[part.EndIndex].Element as TextType;
             var endIndex = this[part.EndIndex].Index;
 
             var parents = new List<OpenXmlElement>();
@@ -243,18 +259,38 @@ namespace SharpDocx
             }
         }
 
-        internal Text ReplaceWithText(MapPart part, string newText)
+        internal T GetReplaceTextForElement<T>(string newText) where T: TextType, new()
         {
-            var startText = this[part.StartIndex].Element as Text;
+            return new T
+            {
+                Text = newText,
+                Space = SpaceProcessingModeValues.Preserve
+            };
+        }
+
+        internal TextType ReplaceWithText(MapPart part, string newText)
+        {
+            var startText = this[part.StartIndex].Element as TextType;
             var startIndex = this[part.StartIndex].Index;
-            var endText = this[part.EndIndex].Element as Text;
+            var endText = this[part.EndIndex].Element as TextType;
             var endIndex = this[part.EndIndex].Index;
 
+            /*
             var addedText = new Text
             {
                 Text = newText,
                 Space = SpaceProcessingModeValues.Preserve
             };
+             */
+            TextType addedText = default;
+            if(startText is FieldCode)
+            {
+                addedText = GetReplaceTextForElement<FieldCode>(newText);
+            } else
+            {
+                addedText = GetReplaceTextForElement<Text>(newText);
+            }
+             
 
             var parents = new List<OpenXmlElement>();
             var parent = startText.Parent;
@@ -290,11 +326,14 @@ namespace SharpDocx
 
                         if (!string.IsNullOrEmpty(postScriptum))
                         {
-                            startText.InsertAfterSelf(new Text
+                            if(startText is FieldCode)
                             {
-                                Text = postScriptum,
-                                Space = SpaceProcessingModeValues.Preserve
-                            });
+                                startText.InsertAfterSelf(GetReplaceTextForElement<FieldCode>(postScriptum));
+                            }
+                            else
+                            {
+                                startText.InsertAfterSelf(GetReplaceTextForElement<Text>(postScriptum));
+                            }
                         }
 
                         startText.InsertAfterSelf(addedText);
